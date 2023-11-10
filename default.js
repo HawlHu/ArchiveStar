@@ -2,6 +2,7 @@
 //宣告變數
 	var pwdl_temp_p_name="";
 	var pwdl_temp_p_name_edu_string="https://wisdom.nutc.edu.tw/~ccliu/im/msa111/";	
+	var pwdl_temp_p_name_edu_string2="https://wisdom.nutc.edu.tw/%7Eccliu/im/msa111/";	
 	var web_system_main_json_datas={
 			"user_login_center_key":"_F4L6QL3GAArEbr4QtyRGEaH8MymA8dA3iRLEFTdej_",
 			"user_login_page_dl_time":3000,
@@ -166,7 +167,8 @@
 				//PC
 					
 					//解決學術網路版面問題
-						if(pwdl_temp_p_name==pwdl_temp_p_name_edu_string){
+						if(pwdl_temp_p_name==pwdl_temp_p_name_edu_string || 
+						   pwdl_temp_p_name==pwdl_temp_p_name_edu_string2){
 							
 							ui_edu_count_index=ui_edu_count_index-2;
 							if(ui_edu_count_index<=0)ui_edu_count_index=0;
