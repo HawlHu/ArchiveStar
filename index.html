@@ -3,295 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPLOPSOFT CDN Node</title>
+    <title>JPLOPSOFT CDN 節點</title>
     <style>
         :root {
-            --primary-color: #0d6efd;
-            --primary-hover: #0b5ed7;
+            --primary-color: #0056b3;
             --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-main: #212529;
-            --text-muted: #6c757d;
+            --text-color: #333;
             --border-color: #dee2e6;
+            --hover-bg: #e9ecef;
         }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
+            color: var(--text-color);
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            line-height: 1.6;
         }
-
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-
-        header {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
         }
-
-        .lang-selector {
-            padding: 0.5rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            font-size: 1rem;
-            background-color: var(--card-bg);
-            cursor: pointer;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        h1 {
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
         }
-
-        .official-link {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-
-        .official-link:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .file-card {
-            background: var(--card-bg);
+        .controls select {
+            padding: 8px 12px;
+            font-size: 14px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .file-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-
-        .file-name {
-            font-family: monospace;
-            font-size: 1.1rem;
-            word-break: break-all;
-            margin-bottom: 1rem;
-            color: #d63384;
-        }
-
-        .copy-btn {
-            background-color: #e9ecef;
-            border: none;
-            padding: 0.5rem;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: 600;
-            color: var(--text-main);
-            transition: background-color 0.2s;
         }
-
-        .copy-btn:hover {
-            background-color: #ced4da;
+        .info-bar {
+            margin-bottom: 20px;
+            font-size: 16px;
         }
-
-        .copy-btn.copied {
-            background-color: #198754;
+        .info-bar a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .info-bar a:hover {
+            text-decoration: underline;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: #fff;
+            white-space: nowrap;
+        }
+        tr:nth-child(even) {
+            background-color: #fdfdfd;
+        }
+        tr:hover {
+            background-color: var(--hover-bg);
+        }
+        .btn-copy {
+            background-color: #28a745;
             color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
         }
-
-        footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        .btn-copy:hover {
+            background-color: #218838;
         }
-
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
+        .source-link {
+            color: #17a2b8;
+            text-decoration: none;
+        }
+        .source-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div style="font-size: 1.5rem; font-weight: bold;">JPLOPSOFT</div>
-            <select class="lang-selector" id="langSwitch" onchange="changeLanguage()">
-                <option value="zh-TW">繁體中文</option>
+<div class="container">
+    <div class="header">
+        <h1 id="title">JPLOPSOFT CDN 節點</h1>
+        <div class="controls">
+            <select id="lang-selector" onchange="changeLanguage()">
+                <option value="zh-TW" selected>繁體中文</option>
+                <option value="zh-CN">简体中文</option>
                 <option value="en">English</option>
                 <option value="ja">日本語</option>
                 <option value="ko">한국어</option>
-                <option value="zh-CN">简体中文</option>
             </select>
-        </header>
-
-        <section class="hero">
-            <h1 id="t-title">JPLOPSOFT CDN 節點</h1>
-            <p id="t-desc">本網頁為 JPLOPSOFT 歸檔星球的 CDN 節點，提供穩定的靜態資源與常用的 JavaScript 函式庫。</p>
-            <a href="https://www.jplopsoft.idv.tw/" target="_blank" class="official-link" id="t-official">訪問官方網站</a>
-        </section>
-
-        <h2 id="t-files-title" style="border-left: 4px solid var(--primary-color); padding-left: 10px;">可用的 JavaScript 檔案</h2>
-        <div class="file-grid" id="fileList">
-            </div>
-
-        <footer>
-            &copy; 2026 JPLOPSOFT. All Rights Reserved.
-        </footer>
+        </div>
     </div>
 
-    <script>
-        // 語系字典
-        const translations = {
-            'zh-TW': {
-                title: 'JPLOPSOFT CDN 節點',
-                desc: '本網頁為 JPLOPSOFT 歸檔星球的 CDN 節點，提供穩定的靜態資源與常用的 JavaScript 函式庫。',
-                official: '訪問官方網站',
-                filesTitle: '可用的 JavaScript 檔案',
-                copyBtn: '複製網址',
-                copied: '已複製!'
-            },
-            'en': {
-                title: 'JPLOPSOFT CDN Node',
-                desc: 'This web page serves as a CDN node for JPLOPSOFT Archive Star, providing stable static resources and common JavaScript libraries.',
-                official: 'Visit Official Website',
-                filesTitle: 'Available JavaScript Files',
-                copyBtn: 'Copy URL',
-                copied: 'Copied!'
-            },
-            'ja': {
-                title: 'JPLOPSOFT CDN ノード',
-                desc: 'このウェブページは JPLOPSOFT Archive Star の CDN ノードであり、安定した静的リソースと一般的な JavaScript ライブラリを提供します。',
-                official: '公式サイトへ',
-                filesTitle: '利用可能な JavaScript ファイル',
-                copyBtn: 'URLをコピー',
-                copied: 'コピーしました!'
-            },
-            'ko': {
-                title: 'JPLOPSOFT CDN 노드',
-                desc: '이 웹페이지는 JPLOPSOFT Archive Star의 CDN 노드로서 안정적인 정적 리소스와 일반적인 JavaScript 라이브러리를 제공합니다.',
-                official: '공식 웹사이트 방문',
-                filesTitle: '사용 가능한 JavaScript 파일',
-                copyBtn: 'URL 복사',
-                copied: '복사됨!'
-            },
-            'zh-CN': {
-                title: 'JPLOPSOFT CDN 节点',
-                desc: '本网页为 JPLOPSOFT 归档星球的 CDN 节点，提供稳定的静态资源与常用的 JavaScript 函数库。',
-                official: '访问官方网站',
-                filesTitle: '可用的 JavaScript 文件',
-                copyBtn: '复制网址',
-                copied: '已复制!'
+    <div class="info-bar">
+        <p id="desc">本網頁為 JPLOPSOFT 提供之靜態資源 (CDN) 節點。</p>
+        <span id="official-label">官方網站：</span> 
+        <a href="https://www.jplopsoft.idv.tw/" target="_blank">https://www.jplopsoft.idv.tw/</a>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th id="th-file">檔案名稱</th>
+                    <th id="th-desc">功能介紹</th>
+                    <th id="th-source">官方來源</th>
+                    <th id="th-action">操作</th>
+                </tr>
+            </thead>
+            <tbody id="file-list">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const CDN_BASE = "https://hawlhu.github.io/ArchiveStar/";
+
+    // 多語系字典
+    const i18n = {
+        "zh-TW": {
+            title: "JPLOPSOFT CDN 節點",
+            desc: "本網頁為 JPLOPSOFT 提供之靜態資源 (CDN) 節點，用於加速資源存取與部署。",
+            official: "官方網站：",
+            th_file: "檔案名稱",
+            th_desc: "功能介紹",
+            th_source: "官方來源",
+            th_action: "操作",
+            copy: "複製連結",
+            copied: "已複製!",
+            na: "自定義 / 查無來源",
+            
+            // 檔案描述
+            desc_aes: "AES 加密演算法庫",
+            desc_aes_dz: "針對 Discuz 系統修改的 AES 加密庫",
+            desc_base64: "Base64 編碼與解碼工具",
+            desc_bs: "Bootstrap 前端 UI 框架核心",
+            desc_bs_bundle: "Bootstrap 前端框架 (包含 Popper.js)",
+            desc_cookie: "JavaScript Cookie 操作庫",
+            desc_esheep: "eSheep 網頁桌面寵物特效",
+            desc_excanvas: "讓舊版 IE 支援 HTML5 Canvas 的補丁",
+            desc_md: "自定義或擴展的 Markdown 處理腳本",
+            desc_ezmc: "自定義 JS 工具腳本",
+            desc_jq: "jQuery 快速且簡潔的 JavaScript 框架",
+            desc_md5: "MD5 雜湊演算法庫",
+            desc_msg: "自定義訊息與彈跳視窗處理邏輯",
+            desc_mocha: "Mocha JavaScript 測試框架",
+            desc_mootools: "MooTools 輕量級物件導向 JavaScript 框架",
+            desc_popper: "用於管理彈出視窗與提示框的定位引擎",
+            desc_qrcode: "二維碼 (QR Code) 生成工具",
+            desc_rc4: "RC4 流加密演算法庫",
+            desc_react: "React 建構使用者介面的 JS 函式庫核心",
+            desc_react_dom: "React DOM 渲染庫",
+            desc_sha1: "SHA-1 雜湊演算法庫",
+            desc_snow: "網頁下雪動畫特效腳本",
+            desc_pwd: "高強度密碼自動生成工具",
+            desc_three: "Three.js 3D 繪圖 JavaScript 函式庫",
+            desc_twsack: "Simple AJAX Code-Kit 輕量級 AJAX 庫"
+        },
+        "zh-CN": {
+            title: "JPLOPSOFT CDN 节点",
+            desc: "本网页为 JPLOPSOFT 提供之静态资源 (CDN) 节点，用于加速资源访问与部署。",
+            official: "官方网站：",
+            th_file: "文件名称",
+            th_desc: "功能介绍",
+            th_source: "官方来源",
+            th_action: "操作",
+            copy: "复制链接",
+            copied: "已复制!",
+            na: "自定义 / 无来源",
+            desc_aes: "AES 加密算法库",
+            desc_aes_dz: "针对 Discuz 系统修改的 AES 加密库",
+            desc_base64: "Base64 编码与解码工具",
+            desc_bs: "Bootstrap 前端 UI 框架核心",
+            desc_bs_bundle: "Bootstrap 前端框架 (包含 Popper.js)",
+            desc_cookie: "JavaScript Cookie 操作库",
+            desc_esheep: "eSheep 网页桌面宠物特效",
+            desc_excanvas: "让旧版 IE 支持 HTML5 Canvas 的补丁",
+            desc_md: "自定义或扩展的 Markdown 处理脚本",
+            desc_ezmc: "自定义 JS 工具脚本",
+            desc_jq: "jQuery 快速且简洁的 JavaScript 框架",
+            desc_md5: "MD5 哈希算法库",
+            desc_msg: "自定义消息与弹窗处理逻辑",
+            desc_mocha: "Mocha JavaScript 测试框架",
+            desc_mootools: "MooTools 轻量级面向对象 JavaScript 框架",
+            desc_popper: "用于管理弹窗与提示框的定位引擎",
+            desc_qrcode: "二维码 (QR Code) 生成工具",
+            desc_rc4: "RC4 流加密算法库",
+            desc_react: "React 构建用户界面的 JS 库核心",
+            desc_react_dom: "React DOM 渲染库",
+            desc_sha1: "SHA-1 哈希算法库",
+            desc_snow: "网页下雪动画特效脚本",
+            desc_pwd: "高强度密码自动生成工具",
+            desc_three: "Three.js 3D 绘图 JavaScript 库",
+            desc_twsack: "Simple AJAX Code-Kit 轻量级 AJAX 库"
+        },
+        "en": {
+            title: "JPLOPSOFT CDN Node",
+            desc: "This page serves as a static resource (CDN) node provided by JPLOPSOFT.",
+            official: "Official Website: ",
+            th_file: "File Name",
+            th_desc: "Description",
+            th_source: "Official Source",
+            th_action: "Action",
+            copy: "Copy URL",
+            copied: "Copied!",
+            na: "Custom / N/A",
+            desc_aes: "AES Encryption Algorithm Library",
+            desc_aes_dz: "AES Encryption modified for Discuz",
+            desc_base64: "Base64 Encoding/Decoding Tool",
+            desc_bs: "Bootstrap UI Framework Core",
+            desc_bs_bundle: "Bootstrap Framework (Includes Popper.js)",
+            desc_cookie: "JavaScript Cookie Management Library",
+            desc_esheep: "eSheep Web Desktop Pet Effect",
+            desc_excanvas: "HTML5 Canvas polyfill for older IE",
+            desc_md: "Custom/Extended Markdown Script",
+            desc_ezmc: "Custom JS Utility Script",
+            desc_jq: "jQuery Fast & Concise JavaScript Library",
+            desc_md5: "MD5 Hashing Algorithm Library",
+            desc_msg: "Custom Message & Modal Handler",
+            desc_mocha: "Mocha JavaScript Test Framework",
+            desc_mootools: "MooTools Lightweight Object-Oriented JS Framework",
+            desc_popper: "Positioning engine for popovers & tooltips",
+            desc_qrcode: "QR Code Generator Tool",
+            desc_rc4: "RC4 Stream Cipher Algorithm",
+            desc_react: "React JS Library for building UIs",
+            desc_react_dom: "React DOM rendering library",
+            desc_sha1: "SHA-1 Hashing Algorithm Library",
+            desc_snow: "Web Snow Falling Animation Effect",
+            desc_pwd: "Strong Password Generator Tool",
+            desc_three: "Three.js 3D Graphics Library",
+            desc_twsack: "Simple AJAX Code-Kit"
+        },
+        "ja": {
+            title: "JPLOPSOFT CDN ノード",
+            desc: "このページは、JPLOPSOFTが提供する静的リソース(CDN)ノードです。",
+            official: "公式サイト：",
+            th_file: "ファイル名",
+            th_desc: "機能紹介",
+            th_source: "公式ソース",
+            th_action: "アクション",
+            copy: "リンクをコピー",
+            copied: "コピーしました!",
+            na: "カスタム / 不明",
+            desc_aes: "AES暗号化アルゴリズムライブラリ",
+            desc_aes_dz: "Discuz用AES暗号化ライブラリ",
+            desc_base64: "Base64エンコード/デコードツール",
+            desc_bs: "Bootstrap UIフレームワークコア",
+            desc_bs_bundle: "Bootstrapフレームワーク (Popper.jsを含む)",
+            desc_cookie: "JavaScript Cookie操作ライブラリ",
+            desc_esheep: "eSheep Webデスクトップペット",
+            desc_excanvas: "旧IE用HTML5 Canvasパッチ",
+            desc_md: "カスタムMarkdown処理スクリプト",
+            desc_ezmc: "カスタムJSユーティリティ",
+            desc_jq: "jQuery JavaScriptライブラリ",
+            desc_md5: "MD5ハッシュアルゴリズム",
+            desc_msg: "カスタムメッセージ処理",
+            desc_mocha: "Mocha JavaScriptテストフレームワーク",
+            desc_mootools: "MooToolsオブジェクト指向JSフレームワーク",
+            desc_popper: "ツールチップ配置エンジン",
+            desc_qrcode: "QRコード生成ツール",
+            desc_rc4: "RC4暗号化アルゴリズム",
+            desc_react: "UI構築用React JSライブラリ",
+            desc_react_dom: "React DOMレンダリングライブラリ",
+            desc_sha1: "SHA-1ハッシュアルゴリズム",
+            desc_snow: "雪降るアニメーションエフェクト",
+            desc_pwd: "強力なパスワード生成ツール",
+            desc_three: "Three.js 3Dグラフィックスライブラリ",
+            desc_twsack: "Simple AJAX Code-Kit"
+        },
+        "ko": {
+            title: "JPLOPSOFT CDN 노드",
+            desc: "이 페이지는 JPLOPSOFT에서 제공하는 정적 리소스(CDN) 노드입니다.",
+            official: "공식 웹사이트: ",
+            th_file: "파일 이름",
+            th_desc: "기능 소개",
+            th_source: "공식 소스",
+            th_action: "작업",
+            copy: "링크 복사",
+            copied: "복사됨!",
+            na: "사용자 지정 / 없음",
+            desc_aes: "AES 암호화 알고리즘 라이브러리",
+            desc_aes_dz: "Discuz용 AES 암호화 라이브러리",
+            desc_base64: "Base64 인코딩/디코딩 도구",
+            desc_bs: "Bootstrap UI 프레임워크 코어",
+            desc_bs_bundle: "Bootstrap 프레임워크 (Popper.js 포함)",
+            desc_cookie: "JavaScript 쿠키 관리 라이브러리",
+            desc_esheep: "eSheep 웹 바탕 화면 애완 동물",
+            desc_excanvas: "이전 IE용 HTML5 Canvas 패치",
+            desc_md: "사용자 지정 Markdown 스크립트",
+            desc_ezmc: "사용자 지정 JS 유틸리티",
+            desc_jq: "jQuery JavaScript 라이브러리",
+            desc_md5: "MD5 해시 알고리즘",
+            desc_msg: "사용자 지정 메시지 처리기",
+            desc_mocha: "Mocha JavaScript 테스트 프레임워크",
+            desc_mootools: "MooTools 객체 지향 JS 프레임워크",
+            desc_popper: "도구 설명 위치 지정 엔진",
+            desc_qrcode: "QR 코드 생성 도구",
+            desc_rc4: "RC4 암호화 알고리즘",
+            desc_react: "UI 구축용 React JS 라이브러리",
+            desc_react_dom: "React DOM 렌더링 라이브러리",
+            desc_sha1: "SHA-1 해시 알고리즘",
+            desc_snow: "눈 내리는 애니메이션 효과",
+            desc_pwd: "강력한 비밀번호 생성 도구",
+            desc_three: "Three.js 3D 그래픽 라이브러리",
+            desc_twsack: "Simple AJAX Code-Kit"
+        }
+    };
+
+    // 檔案資料庫
+    const filesData = [
+        { name: "aes.js", descKey: "desc_aes", source: "https://cryptojs.gitbook.io/docs/" },
+        { name: "aes_for_dz.js", descKey: "desc_aes_dz", source: "" },
+        { name: "base64.js", descKey: "desc_base64", source: "https://developer.mozilla.org/en-US/docs/Glossary/Base64" },
+        { name: "bootstrap.bundle.min.js", descKey: "desc_bs_bundle", source: "https://getbootstrap.com/" },
+        { name: "bootstrap.min.js", descKey: "desc_bs", source: "https://getbootstrap.com/" },
+        { name: "cookie.js", descKey: "desc_cookie", source: "https://github.com/js-cookie/js-cookie" },
+        { name: "esheep.min.js", descKey: "desc_esheep", source: "https://github.com/AdrianOtter/eSheep" },
+        { name: "excanvas-compressed.js", descKey: "desc_excanvas", source: "https://github.com/arv/ExplorerCanvas" },
+        { name: "ex_md1.js", descKey: "desc_md", source: "" },
+        { name: "ex_md2.js", descKey: "desc_md", source: "" },
+        { name: "ez_mc.js", descKey: "desc_ezmc", source: "" },
+        { name: "jquery-1.12.4.js", descKey: "desc_jq", source: "https://jquery.com/" },
+        { name: "jquery-3.3.1.js", descKey: "desc_jq", source: "https://jquery.com/" },
+        { name: "jquery.min.js", descKey: "desc_jq", source: "https://jquery.com/" },
+        { name: "md5.js", descKey: "desc_md5", source: "https://github.com/blueimp/JavaScript-MD5" },
+        { name: "message.js", descKey: "desc_msg", source: "" },
+        { name: "message_v1_0_beta.js", descKey: "desc_msg", source: "" },
+        { name: "mocha.js", descKey: "desc_mocha", source: "https://mochajs.org/" },
+        { name: "mootools-beta-1.2b1-compatible.js", descKey: "desc_mootools", source: "https://mootools.net/" },
+        { name: "popper.js", descKey: "desc_popper", source: "https://popper.js.org/" },
+        { name: "qrcode.js", descKey: "desc_qrcode", source: "https://davidshimjs.github.io/qrcodejs/" },
+        { name: "qrcode.min.js", descKey: "desc_qrcode", source: "https://davidshimjs.github.io/qrcodejs/" },
+        { name: "rc4.js", descKey: "desc_rc4", source: "" },
+        { name: "react-dom.production.min.js", descKey: "desc_react_dom", source: "https://reactjs.org/" },
+        { name: "react.production.min.js", descKey: "desc_react", source: "https://reactjs.org/" },
+        { name: "sha1.js", descKey: "desc_sha1", source: "https://github.com/emn178/js-sha1" },
+        { name: "snowstorm-min.js", descKey: "desc_snow", source: "http://www.schillmania.com/projects/snowstorm/" },
+        { name: "snowstorm.js", descKey: "desc_snow", source: "http://www.schillmania.com/projects/snowstorm/" },
+        { name: "StrongPasswordGenerator.js", descKey: "desc_pwd", source: "" },
+        { name: "three.min.js", descKey: "desc_three", source: "https://threejs.org/" },
+        { name: "tw-sack.js", descKey: "desc_twsack", source: "http://twbs.github.io/" }
+    ];
+
+    // 複製連結功能
+    function copyUrl(fileName, btnElement) {
+        const fullUrl = CDN_BASE + fileName;
+        navigator.clipboard.writeText(fullUrl).then(() => {
+            const lang = document.getElementById("lang-selector").value;
+            const originalText = btnElement.innerText;
+            btnElement.innerText = i18n[lang].copied;
+            btnElement.style.backgroundColor = "#17a2b8";
+            
+            setTimeout(() => {
+                btnElement.innerText = originalText;
+                btnElement.style.backgroundColor = "#28a745";
+            }, 2000);
+        });
+    }
+
+    // 更新介面語言與表格內容
+    function changeLanguage() {
+        const lang = document.getElementById("lang-selector").value;
+        const texts = i18n[lang];
+
+        // 更新靜態文字
+        document.getElementById("title").innerText = texts.title;
+        document.getElementById("desc").innerText = texts.desc;
+        document.getElementById("official-label").innerText = texts.official;
+        document.getElementById("th-file").innerText = texts.th_file;
+        document.getElementById("th-desc").innerText = texts.th_desc;
+        document.getElementById("th-source").innerText = texts.th_source;
+        document.getElementById("th-action").innerText = texts.th_action;
+
+        // 重新渲染表格
+        const tbody = document.getElementById("file-list");
+        tbody.innerHTML = "";
+
+        filesData.forEach(file => {
+            const tr = document.createElement("tr");
+            
+            // 處理來源連結
+            let sourceHtml = `<span style="color:#999;">${texts.na}</span>`;
+            if (file.source !== "") {
+                const domain = new URL(file.source).hostname.replace('www.', '');
+                sourceHtml = `<a href="${file.source}" target="_blank" class="source-link">${domain}</a>`;
             }
-        };
 
-        const baseUrl = "https://hawlhu.github.io/ArchiveStar/";
-        const files = [
-            "aes.js", "aes_for_dz.js", "base64.js", "bootstrap.bundle.min.js",
-            "bootstrap.min.js", "cookie.js", "esheep.min.js", "excanvas-compressed.js",
-            "ex_md1.js", "ex_md2.js", "ez_mc.js", "jquery-1.12.4.js",
-            "jquery-3.3.1.js", "jquery.min.js", "md5.js", "message.js",
-            "message_v1_0_beta.js", "mocha.js", "mootools-beta-1.2b1-compatible.js",
-            "popper.js", "qrcode.js", "qrcode.min.js", "rc4.js",
-            "react-dom.production.min.js", "react.production.min.js", "sha1.js",
-            "snowstorm-min.js", "snowstorm.js", "StrongPasswordGenerator.js",
-            "three.min.js", "tw-sack.js"
-        ];
+            tr.innerHTML = `
+                <td><strong>${file.name}</strong></td>
+                <td>${texts[file.descKey]}</td>
+                <td>${sourceHtml}</td>
+                <td>
+                    <button class="btn-copy" onclick="copyUrl('${file.name}', this)">${texts.copy}</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
 
-        let currentLang = 'zh-TW';
+    // 初始化頁面
+    window.onload = () => {
+        changeLanguage();
+    };
+</script>
 
-        // 初始化檔案列表
-        function initFileList() {
-            const container = document.getElementById('fileList');
-            container.innerHTML = '';
-            
-            files.forEach((file, index) => {
-                const fullUrl = baseUrl + file;
-                const card = document.createElement('div');
-                card.className = 'file-card';
-                card.innerHTML = `
-                    <div class="file-name">${file}</div>
-                    <button class="copy-btn" id="btn-${index}" onclick="copyUrl('${fullUrl}', 'btn-${index}')">
-                        ${translations[currentLang].copyBtn}
-                    </button>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // 切換語系
-        function changeLanguage() {
-            currentLang = document.getElementById('langSwitch').value;
-            const t = translations[currentLang];
-            
-            document.documentElement.lang = currentLang;
-            document.getElementById('t-title').innerText = t.title;
-            document.getElementById('t-desc').innerText = t.desc;
-            document.getElementById('t-official').innerText = t.official;
-            document.getElementById('t-files-title').innerText = t.filesTitle;
-
-            // 更新按鈕文字
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-                if(!btn.classList.contains('copied')) {
-                    btn.innerText = t.copyBtn;
-                }
-            });
-        }
-
-        // 複製網址功能
-        function copyUrl(url, btnId) {
-            navigator.clipboard.writeText(url).then(() => {
-                const btn = document.getElementById(btnId);
-                const originalText = translations[currentLang].copyBtn;
-                
-                btn.innerText = translations[currentLang].copied;
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
-        }
-
-        // 頁面載入時初始化
-        window.onload = () => {
-            initFileList();
-        };
-    </script>
 </body>
 </html>
