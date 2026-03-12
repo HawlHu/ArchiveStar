@@ -234,7 +234,9 @@
 				}
 
 			//去除錯誤div
-				u74Gj3GbmEtrFG4eTr6binM8yyrE63utAmrdL8EjR();
+				//u74Gj3GbmEtrFG4eTr6binM8yyrE63utAmrdL8EjR();
+			//填寫ASDID
+				try{document.getElementById("asdid_span").innerHTML=ex_md1(window.location.href).substr(0,16);}catch (error) {}
 		}
 		
 	}
@@ -307,9 +309,13 @@
 
 //站內搜尋
 	function site_search(){
+			window.location.href="info_search.html?q=" + 
+								encodeURIComponent(document.getElementById("site_search_value").value);
+			/*
 			window.location.href="https://www.google.com/search?q=" + 
 								encodeURIComponent(document.getElementById("site_search_value").value) + "+site%3A" + encodeURIComponent(window.location.hostname) + "&oq=" + 
 								encodeURIComponent(document.getElementById("site_search_value").value) + "+site%3A" + encodeURIComponent(window.location.hostname);
+			*/
 	}
 
 //隨機數字
@@ -353,6 +359,7 @@
 		}
 		
 		function mmLoadMenus() {
+			try {
 			   if (window.mm_menu_0701213252_0) return;
 			   window.mm_menu_0701213252_0 = new Menu("root",web_system_main_json_datas.ex_data.main_menu_wi_size,50,"Verdana",16,"#000000","#FFFFFF","#EEEEEE","#B6B6B6","left","middle",20,0,1000,-5,7,true,true,true,0,true,true);
 			   mm_menu_0701213252_0.addMenuItem("加密工具","location='util_aes_utility.html';void(0);");
@@ -365,6 +372,7 @@
 			   mm_menu_0701213252_0.menuLiteBgColor='#FFFFFF';
 			   mm_menu_0701213252_0.menuBorderBgColor='#FFFFFF';
 			   mm_menu_0701213252_0.writeMenus();
+			} catch (error) {}   
 		} 
 		mmLoadMenus();
 		
@@ -380,13 +388,15 @@
 	setInterval(
 					function(){
 						if(document.readyState==='complete'){
-							if(document.getElementById('mmenu').innerHTML==''){
-									display_menu('mmenu');
-							}
-							if(check_is_login_end==0){
-									check_is_login();
-							}
-							jas_check();
+							try {
+								if(document.getElementById('mmenu').innerHTML==''){
+										display_menu('mmenu');
+								}
+								if(check_is_login_end==0){
+										check_is_login();
+								}
+								jas_check();
+							} catch (error) {}  
 						}
 					},
 					web_system_main_json_datas.ex_data.rwd_sync_sec
